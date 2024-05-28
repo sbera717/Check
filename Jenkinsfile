@@ -24,7 +24,7 @@ pipeline{
             }
             steps{
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh 'mvn sonar:sonar \ -Dsonar.projectKey=${SONAR_PROJECT_KEY} \ -Dsonar.organization=${SONAR_ORGANIZATION} \ -Dsonar.host.url=${SONAR_HOST_URL} \-Dsonar.login=${SONAR_AUTH_TOKEN}'
+                sh 'mvn sonar:sonar  -Dsonar.projectKey=${SONAR_PROJECT_KEY}  -Dsonar.organization=${SONAR_ORGANIZATION} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}'
                 }
             }
         }stage('Build and Push Docker Image') {
