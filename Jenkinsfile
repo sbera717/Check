@@ -1,7 +1,7 @@
 pipeline{
     agent{
         docker{
-            image 'sbera717/dockeragent:v1'
+            image 'sbera717/dockeragent:v2'
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
@@ -27,7 +27,8 @@ pipeline{
                 sh 'mvn sonar:sonar  -Dsonar.projectKey=${SONAR_PROJECT_KEY}  -Dsonar.organization=${SONAR_ORGANIZATION} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}'
                 }
             }
-        }stage('Build and Push Docker Image') {
+        }
+        stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "sbera717/java:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-login')
